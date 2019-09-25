@@ -1,0 +1,145 @@
+﻿<UserControl x:Class="ColorPicker.ColorPicker2"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ColorPicker"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+	
+	
+	<UserControl.Resources>
+	<!--Color resources-->
+		<Color x:Key="ColorPreview">#C4AF8D</Color>
+		<Color x:Key="HueSaturationColor">#FF0000</Color>
+		<Color x:Key="SaturationGradientEnd">#FFFFFF</Color>
+		<Color x:Key="ValueGradientEnd">#000000</Color>
+	</UserControl.Resources>
+	
+    <Grid Background="White">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="30"/>
+			<RowDefinition Height="200"/>
+			<RowDefinition Height="200"/>
+		</Grid.RowDefinitions>
+
+		<Button Grid.Row="0">
+			<Button.Background>
+				<SolidColorBrush Color="{DynamicResource ColorPreview}"/>
+			</Button.Background>
+		</Button>
+
+
+		<!-- Slider Control-->
+		<Grid Grid.Row="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.5*"/>
+				<ColumnDefinition Width="0.5*"/>
+			</Grid.ColumnDefinitions>
+
+			<Grid Grid.Column="0">
+				<StackPanel>
+					<!-- Red channel -->
+					<StackPanel Orientation="Horizontal">
+						<Label Content="R"/>
+						<Slider Width="300" Orientation="Horizontal" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Center">
+							<Slider.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop Color="#000000" Offset="0" />
+										<GradientStop Color="#FF0000" Offset="0.5" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Slider.Background>
+						</Slider>
+					</StackPanel>
+					<!-- Green channel -->
+					<StackPanel Orientation="Horizontal">
+						<Label Content="G"/>
+						<Slider Width="300" Orientation="Horizontal" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Center">
+							<Slider.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop Color="#000000" Offset="0" />
+										<GradientStop Color="#00FF00" Offset="0.5" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Slider.Background>
+						</Slider>
+					</StackPanel>
+					<!-- Blue channel -->
+					<StackPanel Orientation="Horizontal">
+						<Label Content="B"/>
+						<Slider Width="300" Orientation="Horizontal" HorizontalAlignment="Left" BorderThickness="1" BorderBrush="Black" VerticalAlignment="Center">
+							<Slider.Background>
+								<LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+									<LinearGradientBrush.GradientStops>
+										<GradientStop Color="#000000" Offset="0" />
+										<GradientStop Color="#0000FF" Offset="0.5" />
+									</LinearGradientBrush.GradientStops>
+								</LinearGradientBrush>
+							</Slider.Background>
+						</Slider>
+					</StackPanel>
+				</StackPanel>
+			</Grid>
+
+			<Grid Grid.Column="1">
+
+			</Grid>
+		</Grid>
+
+		<!-- Color Control-->
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="225"/>
+				<ColumnDefinition Width="40"/>
+				<ColumnDefinition Width="40"/>
+			</Grid.ColumnDefinitions>
+
+			<!-- Color wheel -->
+			<Grid Grid.Column="0" Width="200" Height="200" x:Name="ColorWheelGrid" HorizontalAlignment="Left">
+				<Ellipse x:Name="ColorWheel" 
+					 InkCanvas.Top="50" InkCanvas.Bottom="50" 
+					 Stroke="Black" StrokeThickness="1"
+					 Fill="White"
+					 Width ="{Binding ElementName=ColorWheelGrid, Path=Width}" 
+					 Height="{Binding ElementName=ColorWheelGrid, Path=Height}"
+					 MouseDown="Ellipse_PreviewMouseDown">
+				</Ellipse>
+			</Grid>
+
+			<!-- Saturation Bar -->
+			<Slider Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Left">
+				<Slider.Background  >
+					<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+						<LinearGradientBrush.GradientStops>
+							<GradientStop Color="{DynamicResource HueSaturationColor}"    Offset="0" />
+							<GradientStop Color="{DynamicResource SaturationGradientEnd}" Offset="1" />
+						</LinearGradientBrush.GradientStops>
+					</LinearGradientBrush>
+				</Slider.Background>
+			</Slider>
+
+			<!-- Brigtness Bar -->
+			<Slider Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Left">
+				<Slider.Background>
+					<LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+						<LinearGradientBrush.GradientStops>
+							<GradientStop Color="{DynamicResource HueSaturationColor}" Offset="0" />
+							<GradientStop Color="{DynamicResource ValueGradientEnd}"   Offset="1" />
+						</LinearGradientBrush.GradientStops>
+					</LinearGradientBrush>
+				</Slider.Background>
+			</Slider>
+
+		</Grid>
+		
+		
+		
+		
+		
+		
+	</Grid>
+</UserControl>
